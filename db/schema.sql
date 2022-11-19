@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS techLink_db;
+CREATE DATABASE techLink_db;
