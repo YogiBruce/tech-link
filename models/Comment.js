@@ -42,4 +42,6 @@ Comment.init(
         freezeTableName: true,
         modelName: 'comment'
     }
-)
+);
+
+module.exports = Comment;
