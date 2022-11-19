@@ -25,7 +25,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 app.use(express.static(_dirname + '/public'));
 app.use(
-
+    session({
+        secret: '',
+        cookie: {maxAge: 172800000, secure: false, sameSite: 'strict'},
+        resave: false,
+        saveUninitialized: false,
+        store: new SequelizeStore({
+            db: sequelize,
+        })
+    })
 );
 
 app.use(passport.initialize());
