@@ -17,7 +17,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 //handlebars
 const hbs = exphbs.create({});
 
-cpmst app = express();
+const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.engine('handlebars', hbs.engine);

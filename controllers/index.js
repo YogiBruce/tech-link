@@ -5,8 +5,8 @@ const userRouter = require('./user');
 const apiRouter = require('./api');
 
 //Path for routes
-router.use('/', homeRouter);
-router.use('/', apiRouter);
+// router.use('/', homeRouter);
+// router.use('/', apiRouter);
 router.use ('/user', userRouter);
 
 //Default for unspecifiec route

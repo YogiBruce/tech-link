@@ -27,16 +27,8 @@ User.init(
                 isAlphanumeric: true
             }
         },
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: false,
-            validate: {
-                isEmail: true
-            }
-        },
         password: {
-            type: DataTypes.STRING(64),
+            type: DataTypes.STRING,
             validate: {
                 len: [8]
             }
