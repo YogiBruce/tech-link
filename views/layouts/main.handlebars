@@ -18,12 +18,12 @@
       <header>
         <h1><a class="title" href="/">Tech-Link</a></h1>
         <nav class="navbar">
-          <a>Home</a>
-          <a>Dashboard</a>
+          <a class="link" href="/">Home</a>
+          <a class="link" href="/dashboard">Dashboard</a>
           {{#if logged_in}}
-          <a>Logout</a>
+          <a class="link" href="/" id="logout">Logout</a>
           {{else}}
-          <a>Login</a>
+          <a class="link" href="/login">Login</a>
           {{/if}}
         </nav>
       </header>
