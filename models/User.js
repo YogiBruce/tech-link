@@ -23,12 +23,14 @@ User.init(
         username:{
             types: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate: {
                 isAlphanumeric: true
             }
         },
         password: {
             type: DataTypes.STRING,
+            allowNull: false,
             validate: {
                 len: [8]
             }
@@ -36,8 +38,9 @@ User.init(
 
     },
     {
+        //Hash Password
         hooks: {
-            beforeCreate: async (UserData) => {
+            beforeCreate: async (userData) => {
                 const salt = await bcrypt.genSalt(10);
                 const hashedPassword = await bcrypt.hash(userData.password, salt);
                 userData.password = hashedPassword;
@@ -50,6 +53,7 @@ User.init(
         },
         sequelize,
         freezeTableName: true,
+        underscored: true,
         timestamps: false,
         modelName: 'user',
     }
