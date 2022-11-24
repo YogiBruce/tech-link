@@ -1,18 +1,15 @@
 const router = require('express').Router();
-const isAuthenticated = require('../../utils/auth');
-const { Comment } = require('../../models/index');
+const withAuth = require('../../utils/auth');
+const { Comment } = require('../../models');
 
-router.post('/:id', isAuthenticated, async (rec, res) => {
-    const user_id = req.user.id;
-    const post_id = req.params.id;
-    const { content } = req.body;
+router.post('/', withAuth, async (req, res) => {
     try {
-        await Comment.create({
-            content,
-            user_id,
-            post_id
+        const newComment = await Comment.create({
+            content: req.body.content,
+            user_id: req.body.user_id,
+            post_id: req.body.post_id
         });
-        res.status(201).redirect('/api/post/${post_id}');
+        res.status(newComment);
     }
     catch (err) { res.status(400).send('Failed to create new comment'); }
 });
