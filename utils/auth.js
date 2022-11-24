@@ -1,10 +1,10 @@
 //Authenticate users login
-const isAuthenticated = async (req, res, next) => {
-    if (req.isAuthenticated()) {
-        next();
+const withAuth = async (req, res, next) => {
+    if (!req.session.sessionwithAuth()) {
+        res.redirect('/login')
     } else {
-        res.redirect('/user/login')
+        next();
     }
 };
 
-module.exports = isAuthenticated
+module.exports = withAuth
