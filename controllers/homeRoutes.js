@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["username"],
+          attributes: ['username'],
         },
       ],
     });
@@ -18,8 +18,8 @@ router.get("/", async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     //Pass serialized data and session to template
-    res.render("homepage", {
-      posts,
+    res.render('homepage', {
+      ...posts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 });
 
 //Get single post
-router.get("/post/:id", async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
   try {
     const postData = await Post.findOne({
       where: {
@@ -40,19 +40,22 @@ router.get("/post/:id", async (req, res) => {
           model: Comment,
           include: {
             model: User,
-            attributes: ["username"],
+            attributes: ['username'],
           },
         },
         {
           model: User,
-          attributes: ["username"],
+          attributes: ['username'],
         },
       ],
     });
 
     if (postData) {
       const post = postData.get({ plain: true });
-      res.render("post-by-id", { post, logged_in: req.session.logged_in });
+      res.render("post-by-id", { 
+        ...posts,
+        logged_in: req.session.logged_in
+       });
     } else {
       res.status(404).end();
     }
