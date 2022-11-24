@@ -1,11 +1,12 @@
 //Supporting files
 const router = require('express').Router();
 
-const apir
+const apiRoutes = require('./api');
+const homeRoutes = require('./home-routes');
+const dashboardRoutes = require('./dashboard-routes');
 
-//Default for unspecifiec route
-router.use((req, res) => {
-    res.send('<h1>Wrong Route!</h1>');
-});
+router.use('/', apiRoutes);
+router.use('/', homeRoutes);
+router.use('/', dashboardRoutes);
 
 module.exports = router;
