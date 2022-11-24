@@ -8,7 +8,12 @@ router.get('/', isAuthenticated, async (req, res) => {
         const postData = await Post.findAll(
             {
                 where: { user_id: req.user.id },
-                include: { model: User }
+                include: [
+                    {
+                        model: User,
+                        attribute:
+                    }
+                ]
             });
     }
     catch (err) {
