@@ -1,72 +1,58 @@
 const router = require('express').Router();
-const isAuthenticated = require('../../util/auth');
-const { Post, User, Comment } = require('../../models/index');
-
-//render new post
-router.get('/newpost', isAuthenticated, async (req,res) =>{
-    try {
-        res.render('newpost', { login: req.isAuthenticated() });
-    }
-    catch (err) { res.status(500).send('404 not found'); }
-});
-
-//get posts and comments
-router.get('/:id', isAuthenticated, async (req, res) => {
-    try {
-        const postData = await Post.findOne({
-            where: { id: req.params.id },
-            include: [
-                { model: User },
-                {
-                    model: Comment,
-                    include: [User]
-                }
-            ]
-        })
-        if (!postData) {
-            return res.status(404).send('404 not found');
-        }
-        const post = postData.get({ plain: true });
-        res.render('post', { post, login: req.isAuthenticated() });
-    }
-    catch (err) { res.status(500).send('Something went wrong'); }
-});
-
-//Edit post if authorized user 
-router.get('/edit/:id', isAuthenticated, async (req, res) => {
-    try {
-        const postData = await Post.findOne({ where: { id: req.params.id} });
-        const post = postData.get({ plain:true });
-        if (post.user_id !== req.user.id) {
-            return res.status(400).send('not allowed');
-        }
-        res.render('edit', { post, login: req.isAuthenticated() });
-    }
-    catch (err) { res.status(500).send('Something went wrong'); }
-});
+const withAuth = require('../../util/auth');
+const { Post } = require('../../models');
+const sequelize = require('../../config/connection');
 
 //Create new post
-router.post('/', isAuthenticated, async (req, res) => {
-    const { title, content } = req.body;
-    const user_id = req.user.id;
+router.post('/', withAuth, async (req, res) => {
     try {
-        await Post.creat({
-            title,
-            content,
-            user_id
+        const newPost = await Post.create({
+            title: req.body.title,
+            content: req.body.content,
+            user_id: req.session.user_id
         });
-        res.status(201).redirect('/user/dashboard');
+        res.json(newPost);
     }
-    catch (err) { res.status(500).send('Failed to post'); }
+    catch (err) {res.status(500).json(err)}
 });
 
 //Updating posts
-router.put('/:id', isAuthenticated, async (req, res) => {
-    try {
-        await Post.destroy({where: {id: req.params.id } });
-        res.status(204).send();
+router.put('/:id', withAuth, async (req, res) => {
+   try{
+    const updatePost = await Post.update(req.body, {
+        where: {
+            id: req.params.id,
+        },
+    });
+
+    if (updatePost) {
+        res.status(200).json(updatePost)
+    } else {
+        res.status(404).json({message: 'No post found'})
     }
-    catch (err) { res.status(500).send('Failed to delete'); }
+   }
+   catch (err) {
+    res.status(500).json(err)
+   }
 });
+
+router.delete('/:id', withAuth, async (req, res) => {
+    try{
+        const deletePost = Post.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+
+        if (deletePost) {
+            res.status(200).json(deletePost)
+        } else {
+            res.status(404).json({message: 'No post found'})
+        }
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 module.export = router;
