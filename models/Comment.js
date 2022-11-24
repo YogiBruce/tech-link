@@ -13,7 +13,8 @@ Comment.init(
         },
         content: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
         },
         user_id: {
             type: DataTypes.INTEGER,
