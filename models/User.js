@@ -21,7 +21,7 @@ User.init(
             allowNull: false
         },
         username:{
-            types: DataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {

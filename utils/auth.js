@@ -1,6 +1,6 @@
 //Authenticate users login
 const withAuth = async (req, res, next) => {
-    if (!req.session.sessionwithAuth()) {
+    if (!req.session.withAuth()) {
         res.redirect('/login')
     } else {
         next();
