@@ -5,6 +5,7 @@ const { Post, User, Comment } = require('../models/');
 //Show all posts when logged in
 router.get('/', withAuth, async (req, res) => {
     try {
+        console.log('in try')
         const postData = await Post.findAll(
             {
                 where: { 
