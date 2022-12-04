@@ -3,6 +3,10 @@ const seedUser = require('./userSeedData.json');
 const seedPost = require('./postSeedData.json');
 const seedComments = require('./commentSeedData.json');
 
+const Post = require('../models/Post');
+const User = require('../models/User');
+const Comment = require('../models/Comment');
+
 const seedDatabase = async () => {
     await sequelize.sync({ force: true });
     console.log("\n-----Database Syced-----\n");
