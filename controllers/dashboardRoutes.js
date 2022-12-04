@@ -9,7 +9,7 @@ router.get('/', withAuth, async (req, res) => {
         const postData = await Post.findAll(
             {
                 where: { 
-                    user_id: req.user.id 
+                    user_id: req.session.user_id 
                 },
                 include: [
                     {
@@ -27,7 +27,8 @@ router.get('/', withAuth, async (req, res) => {
             });
             
             //Serialize data for the template
-            const posts = postData.map((post) => post.get({ plain:true }));
+            const posts = postData.map((post) => post.get({ plain: true }));
+            console.log(posts);
 
             // Pass serialized data and session flag into template
             res.render('dashboard', {
