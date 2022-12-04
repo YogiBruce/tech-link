@@ -16,11 +16,11 @@
   <body>
     <div>
       <header>
-        <h1><a class="title" href="/">Tech-Link</a></h1>
+        <h1>Tech-Link</h1>
         <nav class="navbar">
+          {{#if logged_in}}
           <a class="link" href="/">Home</a>
           <a class="link" href="/dashboard">Dashboard</a>
-          {{#if logged_in}}
           <a class="link" href="/" id="logout">Logout</a>
           {{else}}
           <a class="link" href="/login">Login</a>
