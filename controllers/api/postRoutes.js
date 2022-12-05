@@ -11,9 +11,13 @@ router.post('/', withAuth, async (req, res) => {
             content: req.body.content,
             user_id: req.session.user_id
         });
+        console.log('new post')
         res.json(newPost);
     }
-    catch (err) {res.status(500).json(err)}
+    catch (err) {
+        console.log('post failed', err);
+        res.status(500).json(err)
+    }
 });
 
 //Updating posts
