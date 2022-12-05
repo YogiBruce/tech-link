@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
           model: User,
           attributes: ['username'],
         },
-      ]
+      ],
+      order: [['post_time', 'DESC']],
     });
 
     //Serialize data for the template
@@ -77,8 +78,8 @@ router.get("/profile", withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     res.render("profile", {
-      ...user,
-      logged_in: true,
+      user,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);

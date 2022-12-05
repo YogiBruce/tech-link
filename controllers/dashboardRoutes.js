@@ -43,17 +43,19 @@ router.get('/', withAuth, async (req, res) => {
 
 //Get route for new post
 router.get('/new', (req, res) => {
-    res.render('new-post')
+    res.render('new-post', {
+        logged_in: req.session.logged_in
+    })
 });
 
 //Get route for edit post
 router.get('/edit/:id', withAuth, async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.paras.id);
+        const postData = await Post.findByPk(req.params.id);
 
         if (postData) {
             const post = postData.get({ plain: true });
-            res.render('edit-post', { post });
+            res.render('edit-post', { post, logged_in: req.session.logged_in });
         } else {
             res.status(400).end()
         }
