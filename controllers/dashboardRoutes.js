@@ -5,7 +5,6 @@ const { Post, User, Comment } = require('../models/');
 //Show all posts when logged in
 router.get('/', withAuth, async (req, res) => {
     try {
-        console.log('in try')
         const postData = await Post.findAll(
             {
                 where: { 
@@ -28,7 +27,6 @@ router.get('/', withAuth, async (req, res) => {
             
             //Serialize data for the template
             const posts = postData.map((post) => post.get({ plain: true }));
-            console.log(posts);
 
             // Pass serialized data and session flag into template
             res.render('dashboard', {
