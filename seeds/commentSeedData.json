@@ -1,6 +1,6 @@
 [
     {
-        "content": "Holy moly, I havent ever read anything like this— this was so entertaining and very terrifying all in all. OP you must be careful. Glen is there, and hes searching",
+        "content": "Holy moly, I havent ever read anything like this— this was so entertaining and very terrifying all in all. OP you must be careful.",
         "user_id": 1,
         "post_id":  2
     },
@@ -20,7 +20,7 @@
         "post_id":  1
     },
     {
-        "content": "The biggest reason for a lot of the primary gripes was due to the fact that JavaScript was initially designed to be a LISP, it just got C syntax bolted onto it and a quick OO'ish pattern bolted on-top of it, and to me that is where a lot of the confusion came in.",
+        "content": "The biggest reason for a lot of the primary gripes was due to the fact that JavaScript was initially designed to be a LISP.",
         "user_id": 5,
         "post_id":  3
     }
