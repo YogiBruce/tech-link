@@ -64,7 +64,7 @@ User may view public posts when arriving on landing page. By clicking on Login, 
 <br>
 
 #### Dashboard
-<img src="public\images\login.jpg" width="400px">
+<img src="public\images\dashboard.jpg" width="400px">
 <br>
 
 #### Add Post
