@@ -105,6 +105,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For any questions regarding this application or any other project by YogiBruce:
 
-### Email: [Gmail](da.bruce.jr@gmail.com)
+### Email: [Gmail](mailto:da.bruce.jr@gmail.com)
 
 ### Gihub Profile: [YogiBruce](https://github.com/YogiBruce) 
